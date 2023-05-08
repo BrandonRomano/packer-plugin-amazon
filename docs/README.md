@@ -35,32 +35,32 @@ It is much easier to use and Amazon generally recommends EBS-backed images nowad
 
 
 **Builders**
-- [amazon-ebs](/packer/integrations/builders/ebs) - Create EBS-backed AMIs by
+- [amazon-ebs](/packer/integrations/hashicorp/amazon/builders/ebs) - Create EBS-backed AMIs by
   launching a source AMI and re-packaging it into a new AMI after
   provisioning. If in doubt, use this builder, which is the easiest to get
   started with.
-- [amazon-instance](/packer/integrations/builders/instance) - Create
+- [amazon-instance](/packer/integrations/hashicorp/amazon/builders/instance) - Create
   instance-store AMIs by launching and provisioning a source instance, then
   rebundling it and uploading it to S3.
-- [amazon-chroot](/packer/integrations/builders/chroot) - Create EBS-backed AMIs
+- [amazon-chroot](/packer/integrations/hashicorp/amazon/builders/chroot) - Create EBS-backed AMIs
   from an existing EC2 instance by mounting the root device and using a
   [Chroot](https://en.wikipedia.org/wiki/Chroot) environment to provision
   that device. This is an **advanced builder and should not be used by
   newcomers**. However, it is also the fastest way to build an EBS-backed AMI
   since no new EC2 instance needs to be launched.
-- [amazon-ebssurrogate](/packer/integrations/builders/ebssurrogate) - Create EBS
+- [amazon-ebssurrogate](/packer/integrations/hashicorp/amazon/builders/ebssurrogate) - Create EBS
   -backed AMIs from scratch. Works similarly to the `chroot` builder but does
   not require running in AWS. This is an **advanced builder and should not be
   used by newcomers**.
 
 **Data sources**
-- [amazon-ami](/packer/integrations/datasources/ami) - Filter and fetch an Amazon AMI to output all the AMI information.
-- [amazon-secretsmanager](/packer/integrations/datasources/secretsmanager) - Retrieve information
+- [amazon-ami](/packer/integrations/hashicorp/amazon/datasources/ami) - Filter and fetch an Amazon AMI to output all the AMI information.
+- [amazon-secretsmanager](/packer/integrations/hashicorp/amazon/datasources/secretsmanager) - Retrieve information
   about a Secrets Manager secret version, including its secret value.
-- [amazon-parameterstore](/packer/integrations/datasources/parameterstore) - Retrieve information about a parameter in SSM.
+- [amazon-parameterstore](/packer/integrations/hashicorp/amazon/datasources/parameterstore) - Retrieve information about a parameter in SSM.
 
 **Post-Processors**
-- [amazon-import](/packer/integrations/post-processors/import) -  The Amazon Import post-processor takes an OVA artifact 
+- [amazon-import](/packer/integrations/hashicorp/amazon/post-processors/import) -  The Amazon Import post-processor takes an OVA artifact 
   from various builders and imports it to an AMI available to Amazon Web Services EC2.
 
 ### Authentication
@@ -76,6 +76,7 @@ explained below:
 
 **Static Credentials**
 
+---
 Static credentials can be provided in the form of an access key id and secret.
 These look like:
 
