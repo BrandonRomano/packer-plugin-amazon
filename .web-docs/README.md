@@ -3,8 +3,7 @@ multiple builders, data sources, and a post-processor to build the AMI depending
 
 ### Installation
 
-To install this plugin, copy and paste this code into your Packer configuration .
-Then, run [`packer init`](https://www.packer.io/docs/commands/init).
+To install this plugin, copy and paste this code into your Packer configuration, then run [`packer init`](https://www.packer.io/docs/commands/init).
 
 ```hcl
 packer {
@@ -25,7 +24,7 @@ $ packer plugins install github.com/hashicorp/amazon
 
 ### Components
 
-**Don't know which builder to use?** If in doubt, use the [amazon-ebs builder](/packer/plugins/builders/amazon/ebs). 
+**Don't know which builder to use?** If in doubt, use the [amazon-ebs builder](/packer/plugins/builders/amazon/ebs).
 It is much easier to use and Amazon generally recommends EBS-backed images nowadays.
 
 #### Builders
