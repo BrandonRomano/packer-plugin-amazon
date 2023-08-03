@@ -85,6 +85,8 @@ necessary for this build to succeed and can be found further down the page.
   
   Fast launch is only relevant for Windows AMIs, and should not be used
   for other OSes.
+  See the [Fast Launch Configuration](#fast-launch-config) section for
+  information on the attributes supported for this block.
 
 <!-- End of code generated from the comments of the Config struct in builder/ebs/builder.go; -->
 
@@ -399,26 +401,30 @@ Usage example:
 HCL config example:
 
 ```HCL
-source "amazon-ebs" "example" {
-	assume_role {
-		role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
-		session_name = "SESSION_NAME"
-		external_id  = "EXTERNAL_ID"
+
+	source "amazon-ebs" "example" {
+		assume_role {
+			role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+			session_name = "SESSION_NAME"
+			external_id  = "EXTERNAL_ID"
+		}
 	}
-}
+
 ```
 
 JSON config example:
 
 ```json
-builder{
-	"type": "amazon-ebs",
-	"assume_role": {
-		"role_arn"    :  "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME",
-		"session_name":  "SESSION_NAME",
-		"external_id" :  "EXTERNAL_ID"
+
+	builder{
+		"type": "amazon-ebs",
+		"assume_role": {
+			"role_arn"    :  "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME",
+			"session_name":  "SESSION_NAME",
+			"external_id" :  "EXTERNAL_ID"
+		}
 	}
-}
+
 ```
 
 <!-- End of code generated from the comments of the AssumeRoleConfig struct in builder/common/access_config.go; -->
@@ -525,6 +531,12 @@ JSON example:
   
   * ec2:DescribeVpcs
   * ec2:DescribeSubnets
+  
+  Additionally, since we filter subnets/AZs by their capability to host
+  an instance of the selected type, you may also want to define the
+  `ec2:DescribeInstanceTypeOfferings` action to the role running the build.
+  Otherwise, Packer will pick the most available subnet in the VPC selected,
+  which may not be able to host the instance type you provided.
 
 - `availability_zone` (string) - Destination availability zone to launch
   instance in. Leave this empty to allow Amazon to auto-assign.
@@ -1264,21 +1276,25 @@ build instance at launch using a specific non-default kms key:
 HCL2 example:
 
 ```hcl
-launch_block_device_mappings {
-    device_name = "/dev/sda1"
-    encrypted = true
-    kms_key_id = "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
-}
+
+	launch_block_device_mappings {
+	    device_name = "/dev/sda1"
+	    encrypted = true
+	    kms_key_id = "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
+	}
+
 ```
 
 JSON example:
 ```json
 "launch_block_device_mappings": [
-  {
-     "device_name": "/dev/sda1",
-     "encrypted": true,
-     "kms_key_id": "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
-  }
+
+	{
+	   "device_name": "/dev/sda1",
+	   "encrypted": true,
+	   "kms_key_id": "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
+	}
+
 ]
 ```
 
@@ -1612,6 +1628,57 @@ types and regions can be found in the AWS EC2 Documentation [for
 Linux](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)
 or [for
 Windows](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/finding-an-ami.html).
+
+### Fast Launch Config
+
+<!-- Code generated from the comments of the FastLaunchConfig struct in builder/ebs/fast_launch_setup.go; DO NOT EDIT MANUALLY -->
+
+FastLaunchConfig is the configuration for setting up fast-launch for Windows AMIs
+
+NOTE: requires the Windows image to be sysprep'd to enable fast-launch. See the
+AWS docs for more information:
+https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/win-ami-config-fast-launch.html
+
+<!-- End of code generated from the comments of the FastLaunchConfig struct in builder/ebs/fast_launch_setup.go; -->
+
+
+#### Optional
+
+<!-- Code generated from the comments of the FastLaunchConfig struct in builder/ebs/fast_launch_setup.go; DO NOT EDIT MANUALLY -->
+
+- `enable_fast_launch` (bool) - Configure fast-launch for Windows AMIs
+
+- `template_id` (string) - The ID of the launch template to use for the fast launch
+  
+  This cannot be specified in conjunction with the template name.
+  
+  If no template is specified, the default launch template will be used,
+  as specified in the AWS docs.
+
+- `template_name` (string) - The name of the launch template to use for fast launch
+  
+  This cannot be specified in conjunction with the template ID.
+  
+  If no template is specified, the default launch template will be used,
+  as specified in the AWS docs.
+
+- `template_version` (int) - The version of the launch template to use
+  
+  If unspecified, and a template is referenced, this will default to
+  the latest version available for the template.
+
+- `max_parallel_launches` (int) - Maximum number of instances to launch for creating pre-provisioned snapshots
+  
+  If specified, must be a minimum of `6`
+
+- `target_resource_count` (int) - The number of snapshots to pre-provision for later launching windows instances
+  from the resulting fast-launch AMI.
+  
+  If unspecified, this will create the default number of snapshots (as of
+  march 2023, this defaults to 5 on AWS)
+
+<!-- End of code generated from the comments of the FastLaunchConfig struct in builder/ebs/fast_launch_setup.go; -->
+
 
 ## Accessing the Instance to Debug
 

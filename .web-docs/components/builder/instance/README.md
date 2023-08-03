@@ -103,6 +103,10 @@ necessary for this build to succeed and can be found further down the page.
   okay to create this directory as part of the provisioning process.
   Defaults to /tmp.
 
+- `tpm_support` (string) - NitroTPM Support. Valid options are `v2.0`. See the documentation on
+  [NitroTPM Support](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enable-nitrotpm-support-on-ami.html) for
+  more information. Only enabled if a valid option is provided, otherwise ignored.
+
 <!-- End of code generated from the comments of the Config struct in builder/instance/builder.go; -->
 
 
@@ -391,26 +395,30 @@ Usage example:
 HCL config example:
 
 ```HCL
-source "amazon-ebs" "example" {
-	assume_role {
-		role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
-		session_name = "SESSION_NAME"
-		external_id  = "EXTERNAL_ID"
+
+	source "amazon-ebs" "example" {
+		assume_role {
+			role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+			session_name = "SESSION_NAME"
+			external_id  = "EXTERNAL_ID"
+		}
 	}
-}
+
 ```
 
 JSON config example:
 
 ```json
-builder{
-	"type": "amazon-ebs",
-	"assume_role": {
-		"role_arn"    :  "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME",
-		"session_name":  "SESSION_NAME",
-		"external_id" :  "EXTERNAL_ID"
+
+	builder{
+		"type": "amazon-ebs",
+		"assume_role": {
+			"role_arn"    :  "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME",
+			"session_name":  "SESSION_NAME",
+			"external_id" :  "EXTERNAL_ID"
+		}
 	}
-}
+
 ```
 
 <!-- End of code generated from the comments of the AssumeRoleConfig struct in builder/common/access_config.go; -->
@@ -517,6 +525,12 @@ JSON example:
   
   * ec2:DescribeVpcs
   * ec2:DescribeSubnets
+  
+  Additionally, since we filter subnets/AZs by their capability to host
+  an instance of the selected type, you may also want to define the
+  `ec2:DescribeInstanceTypeOfferings` action to the role running the build.
+  Otherwise, Packer will pick the most available subnet in the VPC selected,
+  which may not be able to host the instance type you provided.
 
 - `availability_zone` (string) - Destination availability zone to launch
   instance in. Leave this empty to allow Amazon to auto-assign.
@@ -1180,21 +1194,25 @@ build instance at launch using a specific non-default kms key:
 HCL2 example:
 
 ```hcl
-launch_block_device_mappings {
-    device_name = "/dev/sda1"
-    encrypted = true
-    kms_key_id = "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
-}
+
+	launch_block_device_mappings {
+	    device_name = "/dev/sda1"
+	    encrypted = true
+	    kms_key_id = "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
+	}
+
 ```
 
 JSON example:
 ```json
 "launch_block_device_mappings": [
-  {
-     "device_name": "/dev/sda1",
-     "encrypted": true,
-     "kms_key_id": "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
-  }
+
+	{
+	   "device_name": "/dev/sda1",
+	   "encrypted": true,
+	   "kms_key_id": "1a2b3c4d-5e6f-1a2b-3c4d-5e6f1a2b3c4d"
+	}
+
 ]
 ```
 
