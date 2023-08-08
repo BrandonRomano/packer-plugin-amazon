@@ -1,7 +1,7 @@
 Type: `amazon-ami`
 
 The Amazon AMI data source will filter and fetch an Amazon AMI, and output all the AMI information that will
-be then available to use in the [Amazon builders](/packer/integrations/BrandonRomano/amazon).
+be then available to use in the [Amazon builders](/packer/integrations/hashicorp/amazon).
 
 -> **Note:** Data sources is a feature exclusively available to HCL2 templates.
 
@@ -62,7 +62,7 @@ This selects the most recent Ubuntu 16.04 HVM EBS AMI from Canonical. Note that 
 
 ## Authentication
 
-The authentication for Amazon Data Sources uses the same configuration options as [Amazon Builders](/packer/integrations/BrandonRomano/amazon). To learn more about all of the available authentication options please see [Amazon Builders authentication](/packer/integrations/BrandonRomano/amazon#authentication).
+The authentication for Amazon Data Sources uses the same configuration options as [Amazon Builders](/packer/integrations/hashicorp/amazon). To learn more about all of the available authentication options please see [Amazon Builders authentication](/packer/integrations/hashicorp/amazon#authentication).
 
 -> **Note:** The authentication session started by a data source is separate from any authentication sessions started by an Amazon builder. Users are encouraged to use `variables` for defining and sharing configuration values between datasources and builders.
 

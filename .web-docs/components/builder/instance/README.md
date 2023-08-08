@@ -27,7 +27,7 @@ machine. This can be done within a provisioner, but must be done before the
 builder finishes running.
 
 ~> Instance builds are not supported for Windows. Use
-[`amazon-ebs`](/packer/integrations/BrandonRomano/amazon/latest/components/builder/ebs) instead.
+[`amazon-ebs`](/packer/integrations/hashicorp/amazon/latest/components/builder/ebs) instead.
 
 ## Configuration Reference
 
@@ -270,7 +270,7 @@ necessary for this build to succeed and can be found further down the page.
 
 <!-- Code generated from the comments of the AccessConfig struct in builder/common/access_config.go; DO NOT EDIT MANUALLY -->
 
-- `access_key` (string) - The access key used to communicate with AWS. [Learn how  to set this](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials).
+- `access_key` (string) - The access key used to communicate with AWS. [Learn how  to set this](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials).
   On EBS, this is not required if you are using `use_vault_aws_engine`
   for authentication instead.
 
@@ -279,7 +279,7 @@ necessary for this build to succeed and can be found further down the page.
   When chroot building, this value is guessed from environment.
 
 - `secret_key` (string) - The secret key used to communicate with AWS. [Learn how to set
-  this](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials). This is not required
+  this](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials). This is not required
   if you are using `use_vault_aws_engine` for authentication instead.
 
 <!-- End of code generated from the comments of the AccessConfig struct in builder/common/access_config.go; -->
@@ -558,7 +558,7 @@ JSON example:
   which will stop the instance for you. If this is set to `true`, Packer
   *will not* stop the instance but will assume that you will send the stop
   signal yourself through your final provisioner. You can do this with a
-  [windows-shell provisioner](/packer/integrations/BrandonRomano/windows-shell). Note that
+  [windows-shell provisioner](/packer/integrations/hashicorp/windows-shell). Note that
   Packer will still wait for the instance to be stopped, and failing to
   send the stop signal yourself, when you have set this flag to `true`,
   will cause a timeout.

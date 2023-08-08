@@ -55,7 +55,7 @@ locals {
 ## Authentication
 
 The Amazon Data Sources authentication works just like for the [Amazon Builders](/packer/plugins/builders). Both
-have the same authentication options, and you can refer to the [Amazon Builders authentication](/packer/integrations/BrandonRomano/index.mdx#authentication)
+have the same authentication options, and you can refer to the [Amazon Builders authentication](/packer/integrations/hashicorp/index.mdx#authentication)
 to learn the options to authenticate for data sources.
 
 -> **Note:** A data source will start and execute in your own authentication session. The authentication in the data source

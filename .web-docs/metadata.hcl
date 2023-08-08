@@ -3,7 +3,7 @@
 integration {
   name = "Amazon"
   description = "The Amazon plugin can be used with HashiCorp Packer to create custom images on AWS."
-  identifier = "packer/BrandonRomano/amazon"
+  identifier = "packer/hashicorp/amazon"
   flags = ["hcp-ready"]
   component {
     type = "data-source"

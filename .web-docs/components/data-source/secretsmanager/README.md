@@ -72,8 +72,8 @@ with the [jsondecode() function](/packer/docs/templates/hcl_templates/functions/
 
 ## Authentication
 
-The Amazon Data Sources authentication works just like for the [Amazon Builders](/packer/integrations/BrandonRomano/amazon). Both
-have the same authentication options, and you can refer to the [Amazon Builders authentication](/packer/integrations/BrandonRomano/amazon#authentication)
+The Amazon Data Sources authentication works just like for the [Amazon Builders](/packer/integrations/hashicorp/amazon). Both
+have the same authentication options, and you can refer to the [Amazon Builders authentication](/packer/integrations/hashicorp/amazon#authentication)
 to learn the options to authenticate for data sources.
 
 -> **Note:** A data source will start and execute in your own authentication session. The authentication in the data source

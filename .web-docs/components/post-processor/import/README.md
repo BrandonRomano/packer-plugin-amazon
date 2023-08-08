@@ -37,7 +37,7 @@ each category, the available configuration keys are alphabetized.
 Required:
 
 - `access_key` (string) - The access key used to communicate with AWS. [Learn
-  how to set this.](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials)
+  how to set this.](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials)
 
 - `region` (string) - The name of the region, such as `us-east-1` in which to
   upload the OVA file to S3 and create the AMI. A list of valid regions can
@@ -48,7 +48,7 @@ Required:
   post-processor is run.
 
 - `secret_key` (string) - The secret key used to communicate with AWS. [Learn
-  how to set this.](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials)
+  how to set this.](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials)
 
 Optional:
 

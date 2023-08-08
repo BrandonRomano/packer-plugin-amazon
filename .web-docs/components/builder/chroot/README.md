@@ -14,7 +14,7 @@ the extra fast build.
 
 ~> **This is an advanced builder** If you're just getting started with
 Packer, we recommend starting with the [amazon-ebs
-builder](/packer/integrations/BrandonRomano/amazon/latest/components/builder/ebs), which is much easier to use.
+builder](/packer/integrations/hashicorp/amazon/latest/components/builder/ebs), which is much easier to use.
 
 The builder does _not_ manage AMIs. Once it creates an AMI and stores it in
 your account, it is up to you to use, delete, etc., the AMI.
@@ -525,7 +525,7 @@ https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concept
 
 <!-- Code generated from the comments of the AccessConfig struct in builder/common/access_config.go; DO NOT EDIT MANUALLY -->
 
-- `access_key` (string) - The access key used to communicate with AWS. [Learn how  to set this](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials).
+- `access_key` (string) - The access key used to communicate with AWS. [Learn how  to set this](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials).
   On EBS, this is not required if you are using `use_vault_aws_engine`
   for authentication instead.
 
@@ -534,7 +534,7 @@ https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concept
   When chroot building, this value is guessed from environment.
 
 - `secret_key` (string) - The secret key used to communicate with AWS. [Learn how to set
-  this](/packer/integrations/BrandonRomano/amazon#specifying-amazon-credentials). This is not required
+  this](/packer/integrations/hashicorp/amazon#specifying-amazon-credentials). This is not required
   if you are using `use_vault_aws_engine` for authentication instead.
 
 <!-- End of code generated from the comments of the AccessConfig struct in builder/common/access_config.go; -->
